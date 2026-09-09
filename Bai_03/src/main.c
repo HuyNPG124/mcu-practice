@@ -42,18 +42,11 @@ void GPIO_Init_PortA(void) {
 
 int main(void) {
     GPIO_Init_PortA();   
-    
+    GPIO_Init_PortB();
     while(1) {
-        // Bước 1: Đọc trạng thái nút nhấn từ PA0-PA7 (Lọc lấy 8 bit thấp)[cite: 1]
         unsigned int input_data = GPIOA_IDR & 0xFF;
-        
-        // Bước 2: Đảo trạng thái các bit (Từ 0 thành 1, từ 1 thành 0)[cite: 1]
         unsigned int inverted_data = (~input_data) & 0xFF;
-        
-        // Bước 3: Dịch dữ liệu đã đảo lên vị trí của PA8-PA15 (dịch trái 8 bit) và xuất ra ODR[cite: 1]
-        // Lưu ý: (GPIOA_ODR & 0x00FF) giúp bảo vệ trạng thái điện trở kéo của PA0-PA7
         GPIOA_ODR = (GPIOA_ODR & 0x00FF) | (inverted_data << 8);
-        
         // Trễ nhẹ để chống nhiễu cơ học
         for(volatile int i = 0; i < 50000; i++);
     }
