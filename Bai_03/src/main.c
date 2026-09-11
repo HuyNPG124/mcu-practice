@@ -42,7 +42,6 @@ void GPIO_Init_PortA(void) {
 
 int main(void) {
     GPIO_Init_PortA();   
-    GPIO_Init_PortB();
     while(1) {
         unsigned int input_data = GPIOA_IDR & 0xFF;
         unsigned int inverted_data = (~input_data) & 0xFF;
