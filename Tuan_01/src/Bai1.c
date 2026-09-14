@@ -43,7 +43,7 @@ int main(void) {
     
     while(1) {
         GPIOC_ODR ^= (1 << 13);
-        Delay_ms(200);
+        Delay_ms(1000);
     }
     return 0;
 }
